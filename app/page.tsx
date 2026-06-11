@@ -66,11 +66,7 @@ export default function Home() {
               As Vancouver&apos;s trusted local mechanical specialist, we deliver pristine commercial-grade craftsmanship directly to your residential project. Backed by over a decade of verified on-site experience.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-2 relative z-10">
-              <a href="mailto:chris@supremeplumbingservice.net" className="bg-white text-black font-bold px-8 py-4 rounded-xl text-center shadow-xl hover:bg-slate-100 transition-colors uppercase tracking-wider text-sm">
-                Connect With Chris
-              </a>
-            </div>
+
           </div>
 
           {/* Right Column: Branded Closed Van Showcase */}
