@@ -3,16 +3,16 @@
 import React, { useState } from 'react';
 
 export default function Home() {
-  // Fixed image paths to strictly match required system blueprints (.png)
-  const [heroImgSrc] = useState('/van-closed.png');
-  const [servicesImgSrc] = useState('/van-open.png');
+  // Matched to your exact public folder assets
+  const [heroImgSrc] = useState('/closed.jpg');
+  const [servicesImgSrc] = useState('/open.jpg');
 
   // Programmatic E-E-A-T Structured Schema for Google Maps/Local Injection
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "PlumbingContractor",
     "name": "Supreme Plumbing Service",
-    "image": ["https://supremeplumbingservice.net/van-closed.png"],
+    "image": ["https://supremeplumbingservice.net/closed.jpg"],
     "telephone": "564-888-3159",
     "email": "chris@supremeplumbingservice.net",
     "address": {
@@ -84,7 +84,7 @@ export default function Home() {
           
           {/* LEFT COLUMN: Desktop Only Glass Wrench Graphic */}
           <div className="hidden lg:flex flex-col items-center justify-center bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-2xl p-6 text-center lg:col-span-1">
-            <svg viewBox="0 0 24 24" class="w-16 h-16 text-slate-300 drop-shadow-[0_4px_12px_rgba(255,255,255,0.1)] animate-pulse" fill="currentColor">
+            <svg viewBox="0 0 24 24" className="w-16 h-16 text-slate-300 drop-shadow-[0_4px_12px_rgba(255,255,255,0.1)] animate-pulse" fill="currentColor">
               <path d="M21.5 3.5c-.8-.8-2-1-3-.5l-2.7 1.4-1.7-1.7a1 1 0 00-1.4 0l-1.5 1.5a1 1 0 000 1.4l1.2 1.2-4.5 4.5-2-2a1 1 0 00-1.4 0l-3 3a1 1 0 000 1.4l1.2 1.2L2.2 18c-.3.3-.3.8 0 1.1l1.4 1.4c.3.3.8.3 1.1 0l3.1-3.1 1.2 1.2a1 1 0 001.4 0l3-3a1 1 0 000-1.4l-2-2 4.5-4.5 1.2 1.2a1 1 0 001.4 0l1.5-1.5a1 1 0 000-1.4l-1.7-1.7 1.4-2.7c.5-1 .3-2.2-.5-3zM7.5 15.3l-1.6-1.6 2.3-2.3 1.6 1.6-2.3 2.3zm8.2-6.2l-4.5 4.5-1.6-1.6 4.5-4.5 1.6 1.6z"/>
             </svg>
             <span className="text-white font-black text-xs tracking-widest mt-4 uppercase">CONTRACTOR GRADE</span>

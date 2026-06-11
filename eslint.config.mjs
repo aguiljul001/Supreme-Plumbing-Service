@@ -12,6 +12,9 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    ignores: [".next/**", "node_modules/**", "dist/**"]
+  },
   // 3. Cleanly parse the classic Next.js web vitals configuration
   ...compat.extends("next/core-web-vitals"),
   

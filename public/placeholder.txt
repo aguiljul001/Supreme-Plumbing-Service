@@ -1,1 +1,1 @@
-Directory initialization
+# This file ensures the public directory is initialized and tracked by Git.
