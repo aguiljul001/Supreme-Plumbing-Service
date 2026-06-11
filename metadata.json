@@ -1,6 +1,6 @@
 {
   "name": "Supreme Plumbing Service",
-  "description": "Licensed, Bonded, and Insured professional plumbing and contractor services with over a decade of trusted experience description.",
+  "description": "Licensed, Bonded, and Insured professional plumbing and contractor services with over a decade of trusted experience.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

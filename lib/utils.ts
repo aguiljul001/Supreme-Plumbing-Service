@@ -1,6 +1,5 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+// This remains perfectly clean and safe
+className={cn(
+  "px-4 py-2 transition-all", 
+  isMobile ? "bg-red-600" : "bg-transparent"
+)}
