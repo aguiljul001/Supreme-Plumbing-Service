@@ -55,11 +55,14 @@ export default function Home() {
       <header className="border-b border-white/[0.05] bg-[#0A111C]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-6">
           
-          {/* Brand Name Lockup */}
-          <div className="flex flex-col">
-            <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-slate-400 font-bold uppercase leading-tight">LICENSED, BONDED, INSURED</span>
-            <div className="text-lg sm:text-xl font-black tracking-tight text-white mt-1 uppercase">
-              SUPREME <span className="text-red-500">PLUMBING SERVICE</span>
+          {/* Elite Modern Brand Name Lockup */}
+          <div className="flex flex-col group cursor-pointer select-none">
+            <div className="flex items-center gap-1.5 opacity-80 group-hover:opacity-100 transition-all duration-300">
+              <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_#ef4444]" />
+              <span className="text-[9px] sm:text-[10px] tracking-[0.25em] text-slate-400 font-bold uppercase leading-none">LICENSED · BONDED · INSURED</span>
+            </div>
+            <div className="text-base sm:text-lg font-black tracking-tight text-white mt-1 uppercase transition-all duration-300 group-hover:scale-[1.01]">
+              SUPREME <span className="text-red-500 group-hover:text-red-400 transition-colors duration-300">PLUMBING SERVICE</span>
             </div>
           </div>
           
@@ -93,12 +96,15 @@ export default function Home() {
                 <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
                 SW Washington's Premier Plumber
               </span>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter text-white uppercase leading-none">
-                SUPREME PLUMBING
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none select-none flex flex-col gap-1 lg:items-start items-center">
+                <span className="text-white hover:text-red-500 transition-colors duration-300">SUPREME</span>
+                <span className="bg-gradient-to-r from-red-500 to-rose-500 bg-clip-text text-transparent filter hover:brightness-110 transition-all duration-300">
+                  PLUMBING
+                </span>
+                <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-[0.45em] text-slate-400 mt-2 hover:text-white transition-colors duration-300">
+                  SERVICE
+                </span>
               </h1>
-              <div className="inline-block bg-gradient-to-r from-red-600 to-rose-600 text-white font-black px-8 py-2 rounded-xl text-lg uppercase tracking-widest shadow-lg transform -skew-x-6">
-                SERVICE
-              </div>
             </div>
 
             <p className="text-sm sm:text-base md:text-lg text-slate-300 font-light leading-relaxed max-w-xl mx-auto lg:mx-0 px-2 lg:px-0">
@@ -121,7 +127,7 @@ export default function Home() {
             <div className="absolute inset-0 bg-red-600/5 rounded-2xl filter blur-xl pointer-events-none" />
             
             {/* Desktop Only view: Single Clean Image */}
-            <div className="hidden lg:block relative w-full aspect-[4/5] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl group">
+            <div className="hidden lg:block relative w-full aspect-[4/5] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl group transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
               <img 
                 src={heroImgSrc} 
                 alt="Supreme Plumbing Service Branded Fleet" 
@@ -150,7 +156,7 @@ export default function Home() {
                 style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
               >
                 {/* Slide 1 */}
-                <div className="min-w-full snap-start relative aspect-[16/10] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-xl">
+                <div className="min-w-full snap-start relative aspect-[16/10] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
                   <img 
                     src={heroImgSrc} 
                     alt="Supreme Plumbing Service Branded Fleet" 
@@ -163,7 +169,7 @@ export default function Home() {
                 </div>
 
                 {/* Slide 2 */}
-                <div className="min-w-full snap-start relative aspect-[16/10] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-xl">
+                <div className="min-w-full snap-start relative aspect-[16/10] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
                   <img 
                     src={servicesImgSrc} 
                     alt="Supreme Plumbing Interior Heavy Contractor Setup" 
@@ -242,7 +248,7 @@ export default function Home() {
           </div>
 
           {/* Right Side: Open Van Interior Showcase (Desktop Only, hidden on mobile) */}
-          <div className="hidden lg:block order-1 lg:order-2 relative w-full aspect-[4/3] bg-slate-900/40 border border-white/[0.08] rounded-3xl overflow-hidden shadow-2xl group">
+          <div className="hidden lg:block order-1 lg:order-2 relative w-full aspect-[4/3] bg-slate-900/40 border border-white/[0.08] rounded-3xl overflow-hidden shadow-2xl group transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
             <img 
               src={servicesImgSrc} 
               alt="Supreme Plumbing Interior Heavy Contractor Setup" 
