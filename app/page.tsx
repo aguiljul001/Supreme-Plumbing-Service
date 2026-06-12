@@ -56,7 +56,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
           
           {/* Glassmorphic Badge Symmetry for Left Brand Block */}
-          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl px-3.5 py-1.5 flex flex-col shadow-sm">
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl px-3 py-2 flex flex-col shadow-sm">
             <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-slate-400 font-bold uppercase leading-tight">LICENSED, BONDED, INSURED</span>
             <div className="text-sm font-black tracking-wider leading-none text-white mt-1">
               PLUMBING<br/><span className="text-red-500 text-xs tracking-widest font-medium">SERVICE</span>
@@ -90,8 +90,8 @@ export default function Home() {
             <svg viewBox="0 0 24 24" className="w-16 h-16 text-slate-300 drop-shadow-[0_4px_12px_rgba(255,255,255,0.1)] animate-pulse" fill="currentColor">
               <path d="M21.5 3.5c-.8-.8-2-1-3-.5l-2.7 1.4-1.7-1.7a1 1 0 00-1.4 0l-1.5 1.5a1 1 0 000 1.4l1.2 1.2-4.5 4.5-2-2a1 1 0 00-1.4 0l-3 3a1 1 0 000 1.4l1.2 1.2L2.2 18c-.3.3-.3.8 0 1.1l1.4 1.4c.3.3.8.3 1.1 0l3.1-3.1 1.2 1.2a1 1 0 001.4 0l3-3a1 1 0 000-1.4l-2-2 4.5-4.5 1.2 1.2a1 1 0 001.4 0l1.5-1.5a1 1 0 000-1.4l-1.7-1.7 1.4-2.7c.5-1 .3-2.2-.5-3zM7.5 15.3l-1.6-1.6 2.3-2.3 1.6 1.6-2.3 2.3zm8.2-6.2l-4.5 4.5-1.6-1.6 4.5-4.5 1.6 1.6z"/>
             </svg>
-            <span className="text-white font-black text-xs tracking-widest mt-4 uppercase">CONTRACTOR GRADE</span>
-            <span className="text-slate-400 text-[10px] tracking-wider font-mono mt-1">100% Lifetime Performance</span>
+            <span className="text-white font-black text-xs tracking-widest mt-4 uppercase">PREMIUM CRAFTSMANSHIP</span>
+            <span className="text-slate-400 text-[10px] tracking-wider font-mono mt-1">Residential Specialists</span>
           </div>
 
           {/* CENTER COLUMN: Central Lockup Copy */}
@@ -110,7 +110,7 @@ export default function Home() {
             </div>
 
             <p className="text-sm sm:text-base md:text-lg text-slate-300 font-light leading-relaxed max-w-xl mx-auto px-2">
-              As Vancouver's trusted local mechanical specialist, we deliver pristine commercial-grade craftsmanship directly to your residential project. Backed by over a decade of verified on-site experience.
+              Vancouver’s trusted home plumbing specialist. From expert tankless upgrades to luxury residential custom remodels and light commercial builds, we deliver clean, honest, premium plumbing backed by over a decade of real field experience.
             </p>
 
             {/* High Converting Action Buttons */}
@@ -138,9 +138,6 @@ export default function Home() {
                   e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
                 }}
               />
-              <div className="absolute bottom-4 left-4 bg-[#0A111C]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/[0.05] shadow-sm">
-                <p className="text-[9px] font-mono tracking-widest text-slate-300">FLEET VEHICLE 01</p>
-              </div>
             </div>
 
             {/* Mobile Swipe Track Carousel (shows on mobile, hidden on lg) */}
@@ -171,9 +168,6 @@ export default function Home() {
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/60 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 bg-[#0A111C]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/[0.05] shadow-sm">
-                    <p className="text-[9px] font-mono tracking-widest text-slate-300">FLEET VEHICLE 01</p>
-                  </div>
                 </div>
 
                 {/* Slide 2 */}
@@ -187,9 +181,6 @@ export default function Home() {
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/60 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 bg-[#0A111C]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/[0.05] shadow-sm">
-                    <p className="text-[9px] font-mono tracking-widest text-[#10B981]">CONTRACTOR GRADE GEAR</p>
-                  </div>
                 </div>
               </div>
 
@@ -218,7 +209,7 @@ export default function Home() {
             </div>
             
             <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
-              We specialize in elite water heater installations, complex infrastructure renovations, and precise diagnostic operations across the Vancouver, WA metro region. No shortcuts, no compromise on local safety codes—just clean, long-lasting structural integrity.
+              We handle everything your home setup needs—specializing in high-efficiency tankless water heater builds, standard water heaters, full house repipes, and custom layout bathroom remodels. We also handle select light commercial plumbing repairs for local storefronts. No shortcuts, no hidden pricing—just top-tier work done right the first time.
             </p>
 
             <div className="grid grid-cols-2 gap-4">
@@ -234,12 +225,21 @@ export default function Home() {
 
             <div className="bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-2xl p-5 sm:p-6 space-y-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]">
               <h3 className="text-[10px] font-mono tracking-[0.25em] text-slate-400 font-bold uppercase">SERVICES CATALOG</h3>
-              <ul className="space-y-3 text-sm">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
-                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full" /> Water Heaters Service
+                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Tankless Water Heaters
                 </li>
                 <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
-                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full" /> Contractor and Plumbing Service
+                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Water Hole Service
+                </li>
+                <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
+                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Full Residential Plumbing
+                </li>
+                <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
+                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Home Remodels & Repipes
+                </li>
+                <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
+                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Light Commercial Repairs
                 </li>
               </ul>
               <div className="pt-3 border-t border-white/[0.05] text-[11px] text-slate-400 font-mono break-all">
@@ -259,9 +259,6 @@ export default function Home() {
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/40 via-transparent to-transparent pointer-events-none sm:hidden" />
-            <div className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full backdrop-blur-md shadow-sm">
-              <p className="text-[9px] sm:text-[10px] font-bold text-emerald-400 tracking-wider uppercase">Contractor Grade Gear</p>
-            </div>
           </div>
 
         </section>
