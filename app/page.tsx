@@ -55,11 +55,29 @@ export default function Home() {
       <header className="border-b border-white/[0.05] bg-[#0A111C]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
           
-          {/* Glassmorphic Badge Symmetry for Left Brand Block */}
-          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl px-3 py-2 flex flex-col shadow-sm">
-            <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-slate-400 font-bold uppercase leading-tight">LICENSED, BONDED, INSURED</span>
-            <div className="text-sm font-black tracking-wider leading-none text-white mt-1">
-              PLUMBING<br/><span className="text-red-500 text-xs tracking-widest font-medium">SERVICE</span>
+          {/* Embedded High-Fidelity Brand Logo Lockup */}
+          <div className="flex items-center gap-3.5 bg-white/[0.02] border border-white/[0.06] rounded-xl px-4 py-2.5 shadow-sm">
+            {/* Custom vector graphic integrating water drop, plumbing wrench, and water tank structure */}
+            <svg className="w-10 h-10 text-red-500 shrink-0" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              {/* Outer cylinder/profile representing the Water Tank structure */}
+              <rect x="14" y="20" width="22" height="32" rx="4" stroke="currentColor" fill="currentColor" fillOpacity="0.05" />
+              {/* Top and bottom collar rings / plates of the Water Tank */}
+              <path d="M14 26h22M14 46h22" stroke="currentColor" strokeWidth="2" />
+              {/* Hot and Cold fluid manifolds exiting on top of the tank */}
+              <path d="M20 20v-6h3m8 6v-6h-3" stroke="currentColor" strokeWidth="2" />
+              
+              {/* Clean water drop icon inside the water tank profile */}
+              <path d="M25 31c0-2 2.5-4.5 2.5-4.5s2.5 2.5 2.5 4.5a2.5 2.5 0 0 1-5 0z" fill="currentColor" stroke="currentColor" strokeWidth="1.5" />
+              
+              {/* Wrench element crossing on the design grid side-by-side */}
+              <path d="M42 16l10 10M36 22l6-6M48 10a4 4 0 1 1 5.6 5.6l-2.1-2.1L48 10z" stroke="currentColor" strokeWidth="3" />
+            </svg>
+            
+            <div className="flex flex-col">
+              <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-slate-400 font-bold uppercase leading-tight">LICENSED, BONDED, INSURED</span>
+              <div className="text-sm font-black tracking-wider leading-none text-white mt-1">
+                PLUMBING<br/><span className="text-red-500 text-xs tracking-widest font-medium">SERVICE</span>
+              </div>
             </div>
           </div>
           
