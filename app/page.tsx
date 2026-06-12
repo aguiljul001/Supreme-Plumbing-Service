@@ -56,7 +56,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
           
           {/* Embedded High-Fidelity Brand Logo Lockup */}
-          <div className="flex items-center gap-3.5 bg-white/[0.02] border border-white/[0.06] rounded-xl px-4 py-2.5 shadow-sm">
+          <div className="flex items-center gap-3.5 bg-white/[0.02] border border-white/[0.06] rounded-xl px-4 py-2.5 shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)]">
             {/* Custom vector graphic integrating water drop, plumbing wrench, and water tank structure */}
             <svg className="w-10 h-10 text-red-500 shrink-0" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               {/* Outer cylinder/profile representing the Water Tank structure */}
@@ -222,17 +222,17 @@ export default function Home() {
             </p>
 
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white/[0.02] border border-white/[0.06] p-4 sm:p-6 rounded-2xl backdrop-blur-sm shadow-sm">
+              <div className="bg-white/[0.02] border border-white/[0.06] p-4 sm:p-6 rounded-2xl backdrop-blur-sm shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)]">
                 <div className="text-2xl sm:text-3xl font-black text-white">10+ Years</div>
                 <div className="text-[10px] font-mono tracking-wider text-slate-400 uppercase mt-1">Local Service</div>
               </div>
-              <div className="bg-white/[0.02] border border-white/[0.06] p-4 sm:p-6 rounded-2xl backdrop-blur-sm shadow-sm">
+              <div className="bg-white/[0.02] border border-white/[0.06] p-4 sm:p-6 rounded-2xl backdrop-blur-sm shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)]">
                 <div className="text-2xl sm:text-3xl font-black text-emerald-400">VERIFIED</div>
                 <div className="text-[10px] font-mono tracking-wider text-slate-400 uppercase mt-1">LICENSED PRO</div>
               </div>
             </div>
 
-            <div className="bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-2xl p-5 sm:p-6 space-y-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)]">
+            <div className="bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-2xl p-5 sm:p-6 space-y-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-[1.01] hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)]">
               <h3 className="text-[10px] font-mono tracking-[0.25em] text-slate-400 font-bold uppercase">SERVICES CATALOG</h3>
               <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                 <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
@@ -274,7 +274,7 @@ export default function Home() {
 
         {/* 4. GOOGLE TRUST & COMPLIANCE BLOCK */}
         <section className="flex justify-center pt-4">
-          <div className="w-full max-w-4xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center relative overflow-hidden backdrop-blur-md shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+          <div className="w-full max-w-4xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center relative overflow-hidden backdrop-blur-md shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-[1.01] hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)]">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
             <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-1 rounded-full text-[9px] sm:text-[10px] font-bold tracking-widest uppercase inline-block mb-4">
               GOOGLE TRUST & COMPLIANCE
@@ -319,7 +319,7 @@ export default function Home() {
           </div>
 
           {/* Unified High-Fidelity Responsive Operation & Verification Dashboard (Columns 2 & 3 Merged) */}
-          <div className="md:col-span-2 bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 space-y-6 shadow-xl relative overflow-hidden backdrop-blur-md">
+          <div className="md:col-span-2 bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 space-y-6 shadow-xl relative overflow-hidden backdrop-blur-md transition-all duration-300 hover:scale-[1.01] hover:border-red-500/50 hover:shadow-[0_0_20px_rgba(239,68,68,0.2)]">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
             
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/[0.05] pb-4 gap-4">
