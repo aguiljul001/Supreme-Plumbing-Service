@@ -6,6 +6,7 @@ export default function Home() {
   // Matched to your exact public folder assets
   const [heroImgSrc] = useState('/closed.jpg');
   const [servicesImgSrc] = useState('/open.jpg');
+  const [activeSlide, setActiveSlide] = useState(0);
 
   // Programmatic E-E-A-T Structured Schema for Google Maps/Local Injection
   const jsonLd = {
@@ -53,8 +54,10 @@ export default function Home() {
       {/* 1. TOP UTILITY HEADER */}
       <header className="border-b border-white/[0.05] bg-[#0A111C]/80 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-          <div className="flex flex-col">
-            <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-slate-400 font-bold uppercase">LICENSED, BONDED, INSURED</span>
+          
+          {/* Glassmorphic Badge Symmetry for Left Brand Block */}
+          <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl px-3.5 py-1.5 flex flex-col shadow-sm">
+            <span className="text-[9px] sm:text-[10px] tracking-[0.2em] text-slate-400 font-bold uppercase leading-tight">LICENSED, BONDED, INSURED</span>
             <div className="text-sm font-black tracking-wider leading-none text-white mt-1">
               PLUMBING<br/><span className="text-red-500 text-xs tracking-widest font-medium">SERVICE</span>
             </div>
@@ -121,10 +124,12 @@ export default function Home() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Fleet Vehicle Image (Un-hidden and fully responsive for Mobile) */}
+          {/* RIGHT COLUMN: Interactive Web & Mobile Carousel / Desktop Single Asset Representation */}
           <div className="lg:col-span-1 relative order-2 mt-4 lg:mt-0">
             <div className="absolute inset-0 bg-red-600/5 rounded-2xl filter blur-xl pointer-events-none" />
-            <div className="relative w-full aspect-[16/10] lg:aspect-[4/5] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl group">
+            
+            {/* Desktop Only view: Single Clean Image */}
+            <div className="hidden lg:block relative w-full aspect-[4/5] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl group">
               <img 
                 src={heroImgSrc} 
                 alt="Supreme Plumbing Service Branded Fleet" 
@@ -133,9 +138,65 @@ export default function Home() {
                   e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/60 via-transparent to-transparent pointer-events-none sm:hidden" />
               <div className="absolute bottom-4 left-4 bg-[#0A111C]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/[0.05] shadow-sm">
                 <p className="text-[9px] font-mono tracking-widest text-slate-300">FLEET VEHICLE 01</p>
+              </div>
+            </div>
+
+            {/* Mobile Swipe Track Carousel (shows on mobile, hidden on lg) */}
+            <div className="block lg:hidden w-full">
+              <div 
+                className="overflow-x-auto flex snap-x snap-mandatory scrollbar-none gap-4 pb-4"
+                onScroll={(e) => {
+                  const target = e.currentTarget;
+                  const scrollLeft = target.scrollLeft;
+                  const width = target.clientWidth;
+                  if (width > 0) {
+                    const newIndex = Math.round(scrollLeft / width);
+                    if (newIndex !== activeSlide) {
+                      setActiveSlide(newIndex);
+                    }
+                  }
+                }}
+                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+              >
+                {/* Slide 1 */}
+                <div className="min-w-full snap-start relative aspect-[16/10] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-xl">
+                  <img 
+                    src={heroImgSrc} 
+                    alt="Supreme Plumbing Service Branded Fleet" 
+                    className="w-full h-full object-cover object-center"
+                    onError={(e) => {
+                      e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/60 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 bg-[#0A111C]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/[0.05] shadow-sm">
+                    <p className="text-[9px] font-mono tracking-widest text-slate-300">FLEET VEHICLE 01</p>
+                  </div>
+                </div>
+
+                {/* Slide 2 */}
+                <div className="min-w-full snap-start relative aspect-[16/10] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-xl">
+                  <img 
+                    src={servicesImgSrc} 
+                    alt="Supreme Plumbing Interior Heavy Contractor Setup" 
+                    className="w-full h-full object-cover object-center"
+                    onError={(e) => {
+                      e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/60 via-transparent to-transparent pointer-events-none" />
+                  <div className="absolute bottom-4 left-4 bg-[#0A111C]/80 backdrop-blur-md px-3 py-1 rounded-xl border border-white/[0.05] shadow-sm">
+                    <p className="text-[9px] font-mono tracking-widest text-[#10B981]">CONTRACTOR GRADE GEAR</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pill-shaped pagination indicators */}
+              <div className="flex justify-center gap-2 mt-2">
+                <div className={`h-1.5 rounded-full transition-all duration-300 ${activeSlide === 0 ? 'w-6 bg-red-500' : 'w-2 bg-white/20'}`} />
+                <div className={`h-1.5 rounded-full transition-all duration-300 ${activeSlide === 1 ? 'w-6 bg-red-500' : 'w-2 bg-white/20'}`} />
               </div>
             </div>
           </div>
@@ -148,8 +209,10 @@ export default function Home() {
           <div className="space-y-6 sm:space-y-8 order-2 lg:order-1">
             <div className="space-y-3">
               <span className="text-red-500 text-xs font-mono font-bold tracking-widest uppercase block">Serving Vancouver & Surrounding Areas</span>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight leading-tight">
-                A Decade of Trusted Experience
+              
+              {/* Aggressive Modern Typography Compression and Color Break Overhauls */}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-tight">
+                A DECADE OF <span className="text-red-500">TRUSTED</span> EXPERIENCE
               </h2>
               <div className="h-1 w-20 bg-red-600 rounded-full" />
             </div>
@@ -185,8 +248,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Side: Open Van Interior Showcase (Optimized layout and bounds for mobile) */}
-          <div className="order-1 lg:order-2 relative w-full aspect-[16/11] sm:aspect-[4/3] bg-slate-900/40 border border-white/[0.08] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl group">
+          {/* Right Side: Open Van Interior Showcase (Desktop Only, hidden on mobile since it's in the mobile hero carousel) */}
+          <div className="hidden lg:block order-1 lg:order-2 relative w-full aspect-[4/3] bg-slate-900/40 border border-white/[0.08] rounded-3xl overflow-hidden shadow-2xl group">
             <img 
               src={servicesImgSrc} 
               alt="Supreme Plumbing Interior Heavy Contractor Setup" 
@@ -232,7 +295,7 @@ export default function Home() {
 
       </main>
 
-      {/* 5. FOOTER ARCHITECTURE */}
+      {/* 5. FOOTER ARCHITECTURE WITH INTEGRATED HIGH-FIDELITY DASHBOARD WIDGET */}
       <footer className="border-t border-white/[0.05] bg-[#0A111C] mt-16 sm:mt-24 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 text-sm text-slate-400">
           
@@ -249,36 +312,81 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Column 2: Operation Tracking */}
-          <div>
-            <div className="text-white font-bold tracking-wider text-xs uppercase mb-4">HOURS OF OPERATION</div>
-            <div className="space-y-2.5 font-mono text-xs">
-              <div className="flex justify-between border-b border-white/[0.03] pb-1.5">
-                <span className="text-slate-300">Monday - Friday</span>
-                <span className="text-white font-bold">7:00 AM - 5:00 PM</span>
+          {/* Unified High-Fidelity Responsive Operation & Verification Dashboard (Columns 2 & 3 Merged) */}
+          <div className="md:col-span-2 bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 space-y-6 shadow-xl relative overflow-hidden backdrop-blur-md">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/[0.05] pb-4 gap-4">
+              <div>
+                <span className="text-emerald-400 text-[10px] font-mono font-bold tracking-widest uppercase block mb-1">SYSTEM CONNECTIVITY</span>
+                <h3 className="text-white font-black tracking-tight text-sm uppercase">Active Operations & Verification Registry</h3>
               </div>
-              <div className="flex justify-between text-slate-500 border-b border-white/[0.01] pb-1.5">
-                <span>Saturday</span>
-                <span>CLOSED</span>
-              </div>
-              <div className="flex justify-between text-slate-500">
-                <span>Sunday</span>
-                <span>CLOSED</span>
+              <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/25 rounded-full px-3 py-1">
+                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
+                <span className="w-2 h-2 bg-emerald-400 rounded-full absolute" />
+                <span className="text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">SYSTEMS LIVE</span>
               </div>
             </div>
-          </div>
 
-          {/* Column 3: Trust Badges Registry Container */}
-          <div>
-            <div className="text-white font-bold tracking-wider text-xs uppercase mb-4">TRUST BADGES</div>
-            <div className="bg-white/[0.02] border border-white/[0.06] rounded-xl p-4 space-y-2.5 text-xs font-light shadow-sm">
-              <p className="text-slate-200 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full" /> 
-                <strong>Status:</strong> Licensed, Bonded, and Insured
-              </p>
-              <p className="text-slate-400 leading-normal font-mono text-[11px]">
-                Active Bonding & Liability Registry Code verified under Washington Board ID: <span className="text-white">SUPREPS747K2</span>.
-              </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              
+              {/* Sleek Operating Dispatch Rows */}
+              <div className="space-y-3">
+                <div className="text-slate-400 font-bold tracking-wider text-[11px] uppercase">OPERATING DISPATCH WINDOWS</div>
+                <div className="space-y-2">
+                  
+                  {/* Monday - Friday */}
+                  <div className="flex items-center justify-between bg-white/[0.02] border border-white/[0.04] rounded-xl px-3 py-2.5 transition-all hover:bg-white/[0.04]">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-[0_0_8px_#34d399]" />
+                      <span className="text-slate-300 font-mono text-[11px]">Mon - Fri</span>
+                    </div>
+                    <span className="text-white font-bold font-mono text-[11px]">7:00 AM - 5:00 PM</span>
+                  </div>
+
+                  {/* Saturday */}
+                  <div className="flex items-center justify-between bg-white/[0.01] border border-white/[0.02] rounded-xl px-3 py-2.5 opacity-60">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-slate-600 rounded-full" />
+                      <span className="text-slate-400 font-mono text-[11px]">Saturday</span>
+                    </div>
+                    <span className="text-slate-400 font-bold font-mono text-[11px]">CLOSED</span>
+                  </div>
+
+                  {/* Sunday */}
+                  <div className="flex items-center justify-between bg-white/[0.01] border border-white/[0.02] rounded-xl px-3 py-2.5 opacity-60">
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 bg-slate-600 rounded-full" />
+                      <span className="text-slate-400 font-mono text-[11px]">Sunday</span>
+                    </div>
+                    <span className="text-slate-400 font-bold font-mono text-[11px]">CLOSED</span>
+                  </div>
+
+                </div>
+              </div>
+
+              {/* Security & Compliance Widget */}
+              <div className="space-y-3">
+                <div className="text-slate-400 font-bold tracking-wider text-[11px] uppercase">SECURITY & COMPLIANCE REGISTRY</div>
+                <div className="bg-white/[0.02] border border-white/[0.04] rounded-xl p-4 space-y-3 h-[calc(100%-24px)] flex flex-col justify-between">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-slate-200 text-xs font-semibold">
+                      <svg className="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                      Licensed, Bonded, & Insured
+                    </div>
+                    <p className="text-slate-400 leading-normal font-mono text-[10px]">
+                      Active regional structural liability bonding and full commercial-grade indemnity verified under Washington State Board ID.
+                    </p>
+                  </div>
+                  <div className="bg-white/[0.02] border border-white/[0.06] rounded px-2.5 py-1 text-[10px] font-mono tracking-wider text-slate-300 flex justify-between items-center">
+                    <span className="text-slate-500">BOARD ID:</span>
+                    <span className="text-white font-bold">SUPREPS747K2</span>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
