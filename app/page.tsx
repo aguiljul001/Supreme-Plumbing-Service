@@ -1,12 +1,132 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+const CAROUSEL_IMAGES = [
+  {
+    src: '/closed.jpg',
+    alt: 'Supreme Plumbing Service Branded Fleet',
+    label: 'FLEET VEHICLE 01'
+  },
+  {
+    src: '/open.jpg',
+    alt: 'Supreme Plumbing Interior Heavy Contractor Setup',
+    label: 'CONTRACTOR GRADE GEAR'
+  }
+];
+
+function ImageCarousel({ 
+  images, 
+  initialSlide = 0 
+}: { 
+  images: typeof CAROUSEL_IMAGES; 
+  initialSlide?: number;
+}) {
+  const [current, setCurrent] = useState(initialSlide);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Smooth cinematic autoplay
+  useEffect(() => {
+    if (isHovered) return;
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [isHovered, images.length]);
+
+  const handlePrev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  const handleNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrent((prev) => (prev + 1) % images.length);
+  };
+
+  return (
+    <div 
+      className="relative w-full aspect-[4/3] md:aspect-[4/5] bg-slate-900/40 border border-white/[0.08] lg:rounded-2xl rounded-xl overflow-hidden shadow-2xl group transition-all duration-500 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)] flex flex-col justify-between"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Slides Container */}
+      <div className="absolute inset-0 w-full h-full">
+        {images.map((img, idx) => (
+          <div
+            key={idx}
+            className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${
+              idx === current 
+                ? 'opacity-100 scale-100 pointer-events-auto' 
+                : 'opacity-0 scale-95 pointer-events-none'
+            }`}
+          >
+            <img 
+              src={img.src} 
+              alt={img.alt} 
+              className="w-full h-full object-cover object-center"
+              onError={(e) => {
+                e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
+              }}
+            />
+            {/* Dark bottom gradient overlay for pristine text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/85 via-transparent to-transparent pointer-events-none" />
+          </div>
+        ))}
+      </div>
+
+      {/* Slide Badge Overlay */}
+      <div className="absolute top-4 left-4 bg-[#0A111C]/85 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/[0.05] z-20">
+        <p className="text-[10px] font-mono tracking-widest text-slate-300 font-bold uppercase">
+          {images[current].label}
+        </p>
+      </div>
+
+      {/* Manual Interactivity Controls: Arrows */}
+      <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between items-center z-25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+        <button 
+          onClick={handlePrev}
+          className="w-9 h-9 rounded-full bg-[#0A111C]/80 hover:bg-red-600 hover:text-white text-slate-300 flex items-center justify-center backdrop-blur-sm border border-white/10 hover:border-red-500/50 transition-all duration-200 pointer-events-auto active:scale-90 shadow-md"
+          aria-label="Previous image"
+        >
+          <svg className="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button 
+          onClick={handleNext}
+          className="w-9 h-9 rounded-full bg-[#0A111C]/80 hover:bg-red-600 hover:text-white text-slate-300 flex items-center justify-center backdrop-blur-sm border border-white/10 hover:border-red-500/50 transition-all duration-200 pointer-events-auto active:scale-90 shadow-md"
+          aria-label="Next image"
+        >
+          <svg className="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Bullet Pagination Indicator Row */}
+      <div className="absolute bottom-4 inset-x-0 flex justify-center gap-2 z-20">
+        {images.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrent(idx);
+            }}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              idx === current 
+                ? 'w-6 bg-red-500 shadow-[0_0_8px_#ef4444]' 
+                : 'w-2 bg-white/20 hover:bg-white/40'
+            }`}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
-  // Matched to your exact public folder assets
-  const [heroImgSrc] = useState('/closed.jpg');
-  const [servicesImgSrc] = useState('/open.jpg');
-  const [activeSlide, setActiveSlide] = useState(0);
 
   // Programmatic E-E-A-T Structured Schema for Google Maps/Local Injection
   const jsonLd = {
@@ -122,72 +242,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Interactive Web & Mobile Carousel / Desktop Single Asset Representation */}
+          {/* RIGHT COLUMN: Premium Responsive Interactive Image Carousel */}
           <div className="lg:col-span-1 relative order-2 mt-4 lg:mt-0">
             <div className="absolute inset-0 bg-red-600/5 rounded-2xl filter blur-xl pointer-events-none" />
-            
-            {/* Desktop Only view: Single Clean Image */}
-            <div className="hidden lg:block relative w-full aspect-[4/5] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-2xl group transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-              <img 
-                src={heroImgSrc} 
-                alt="Supreme Plumbing Service Branded Fleet" 
-                className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-                onError={(e) => {
-                  e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
-                }}
-              />
-            </div>
-
-            {/* Mobile Swipe Track Carousel (shows on mobile, hidden on lg) */}
-            <div className="block lg:hidden w-full">
-              <div 
-                className="overflow-x-auto flex snap-x snap-mandatory scrollbar-none gap-4 pb-4"
-                onScroll={(e) => {
-                  const target = e.currentTarget;
-                  const scrollLeft = target.scrollLeft;
-                  const width = target.clientWidth;
-                  if (width > 0) {
-                    const newIndex = Math.round(scrollLeft / width);
-                    if (newIndex !== activeSlide) {
-                      setActiveSlide(newIndex);
-                    }
-                  }
-                }}
-                style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-              >
-                {/* Slide 1 */}
-                <div className="min-w-full snap-start relative aspect-[16/10] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-                  <img 
-                    src={heroImgSrc} 
-                    alt="Supreme Plumbing Service Branded Fleet" 
-                    className="w-full h-full object-cover object-center"
-                    onError={(e) => {
-                      e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/60 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Slide 2 */}
-                <div className="min-w-full snap-start relative aspect-[16/10] bg-slate-900/40 border border-white/[0.08] rounded-2xl overflow-hidden shadow-xl transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-                  <img 
-                    src={servicesImgSrc} 
-                    alt="Supreme Plumbing Interior Heavy Contractor Setup" 
-                    className="w-full h-full object-cover object-center"
-                    onError={(e) => {
-                      e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/60 via-transparent to-transparent pointer-events-none" />
-                </div>
-              </div>
-
-              {/* Pill-shaped pagination indicators */}
-              <div className="flex justify-center gap-2 mt-2">
-                <div className={`h-1.5 rounded-full transition-all duration-300 ${activeSlide === 0 ? 'w-6 bg-red-500' : 'w-2 bg-white/20'}`} />
-                <div className={`h-1.5 rounded-full transition-all duration-300 ${activeSlide === 1 ? 'w-6 bg-red-500' : 'w-2 bg-white/20'}`} />
-              </div>
-            </div>
+            <ImageCarousel images={CAROUSEL_IMAGES} initialSlide={0} />
           </div>
 
         </section>
@@ -247,17 +305,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Right Side: Open Van Interior Showcase (Desktop Only, hidden on mobile) */}
-          <div className="hidden lg:block order-1 lg:order-2 relative w-full aspect-[4/3] bg-slate-900/40 border border-white/[0.08] rounded-3xl overflow-hidden shadow-2xl group transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-            <img 
-              src={servicesImgSrc} 
-              alt="Supreme Plumbing Interior Heavy Contractor Setup" 
-              className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-              onError={(e) => {
-                e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/40 via-transparent to-transparent pointer-events-none sm:hidden" />
+          {/* Right Side: Secondary Carousel (Starting with Slide 1, fully visible on mobile & desktop) */}
+          <div className="order-1 lg:order-2 relative w-full">
+            <div className="absolute inset-0 bg-red-600/5 rounded-2xl filter blur-xl pointer-events-none" />
+            <ImageCarousel images={CAROUSEL_IMAGES} initialSlide={1} />
           </div>
 
         </section>
