@@ -1,6 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { 
+  Phone, 
+  Mail, 
+  ShieldCheck, 
+  CheckCircle2, 
+  Award, 
+  BadgePercent
+} from 'lucide-react';
 
 const CAROUSEL_IMAGES = [
   {
@@ -15,6 +23,7 @@ const CAROUSEL_IMAGES = [
   }
 ];
 
+// Reusable Elegant Carousel Component
 function ImageCarousel({ 
   images, 
   initialSlide = 0 
@@ -25,12 +34,12 @@ function ImageCarousel({
   const [current, setCurrent] = useState(initialSlide);
   const [isHovered, setIsHovered] = useState(false);
 
-  // Smooth cinematic autoplay
+  // Autoplay intervals
   useEffect(() => {
     if (isHovered) return;
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % images.length);
-    }, 5500);
+    }, 5000);
     return () => clearInterval(timer);
   }, [isHovered, images.length]);
 
@@ -46,18 +55,18 @@ function ImageCarousel({
 
   return (
     <div 
-      className="relative w-full aspect-[4/3] md:aspect-[4/5] bg-slate-900/40 border border-white/[0.08] lg:rounded-2xl rounded-xl overflow-hidden shadow-2xl group transition-all duration-500 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)] flex flex-col justify-between"
+      className="relative w-full aspect-[4/3] md:aspect-[1.1] bg-slate-100 border border-slate-200/90 rounded-2xl overflow-hidden shadow-md group transition-all duration-300 hover:shadow-lg flex flex-col justify-between"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Slides Container */}
+      {/* Slides */}
       <div className="absolute inset-0 w-full h-full">
         {images.map((img, idx) => (
           <div
             key={idx}
             className={`absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${
               idx === current 
-                ? 'opacity-100 scale-100 pointer-events-auto' 
+                ? 'opacity-100 scale-100' 
                 : 'opacity-0 scale-95 pointer-events-none'
             }`}
           >
@@ -66,27 +75,28 @@ function ImageCarousel({
               alt={img.alt} 
               className="w-full h-full object-cover object-center"
               onError={(e) => {
-                e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%230f172a'/></svg>";
+                e.currentTarget.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'><rect width='100%' height='100%' fill='%23f1f5f9'/></svg>";
               }}
             />
-            {/* Dark bottom gradient overlay for pristine text readability */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/85 via-transparent to-transparent pointer-events-none" />
+            {/* Cinematic Overlay gradient for contrast read */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
           </div>
         ))}
       </div>
 
-      {/* Slide Badge Overlay */}
-      <div className="absolute top-4 left-4 bg-[#0A111C]/85 backdrop-blur-md px-3 py-1.5 rounded-xl border border-white/[0.05] z-20">
-        <p className="text-[10px] font-mono tracking-widest text-slate-300 font-bold uppercase">
+      {/* Badges on Slide */}
+      <div className="absolute top-4 left-4 bg-slate-900/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-white/15 z-20 shadow-sm">
+        <p className="text-[9px] font-mono tracking-[0.2em] text-slate-100 font-bold uppercase flex items-center gap-1.5">
+          <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-ping" />
           {images[current].label}
         </p>
       </div>
 
-      {/* Manual Interactivity Controls: Arrows */}
-      <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between items-center z-25 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+      {/* Manual Left/Right Controls */}
+      <div className="absolute inset-x-4 top-1/2 -translate-y-1/2 flex justify-between items-center z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
         <button 
           onClick={handlePrev}
-          className="w-9 h-9 rounded-full bg-[#0A111C]/80 hover:bg-red-600 hover:text-white text-slate-300 flex items-center justify-center backdrop-blur-sm border border-white/10 hover:border-red-500/50 transition-all duration-200 pointer-events-auto active:scale-90 shadow-md"
+          className="w-10 h-10 rounded-full bg-white hover:bg-red-600 hover:text-white text-slate-800 flex items-center justify-center backdrop-blur-sm border border-slate-200 shadow-md transition-all duration-200 pointer-events-auto active:scale-95"
           aria-label="Previous image"
         >
           <svg className="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" strokeWidth="2.5">
@@ -95,7 +105,7 @@ function ImageCarousel({
         </button>
         <button 
           onClick={handleNext}
-          className="w-9 h-9 rounded-full bg-[#0A111C]/80 hover:bg-red-600 hover:text-white text-slate-300 flex items-center justify-center backdrop-blur-sm border border-white/10 hover:border-red-500/50 transition-all duration-200 pointer-events-auto active:scale-90 shadow-md"
+          className="w-10 h-10 rounded-full bg-white hover:bg-red-600 hover:text-white text-slate-800 flex items-center justify-center backdrop-blur-sm border border-slate-200 shadow-md transition-all duration-200 pointer-events-auto active:scale-95"
           aria-label="Next image"
         >
           <svg className="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" strokeWidth="2.5">
@@ -104,8 +114,8 @@ function ImageCarousel({
         </button>
       </div>
 
-      {/* Bullet Pagination Indicator Row */}
-      <div className="absolute bottom-4 inset-x-0 flex justify-center gap-2 z-20">
+      {/* Indicator Bullets */}
+      <div className="absolute bottom-4 inset-x-0 flex justify-center gap-2.5 z-20">
         {images.map((_, idx) => (
           <button
             key={idx}
@@ -113,10 +123,10 @@ function ImageCarousel({
               e.stopPropagation();
               setCurrent(idx);
             }}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
+            className={`h-2 rounded-full transition-all duration-300 ${
               idx === current 
-                ? 'w-6 bg-red-500 shadow-[0_0_8px_#ef4444]' 
-                : 'w-2 bg-white/20 hover:bg-white/40'
+                ? 'w-7 bg-red-600' 
+                : 'w-2 bg-white/50 hover:bg-white/80'
             }`}
             aria-label={`Go to slide ${idx + 1}`}
           />
@@ -127,8 +137,14 @@ function ImageCarousel({
 }
 
 export default function Home() {
+  const handleScrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
-  // Programmatic E-E-A-T Structured Schema for Google Maps/Local Injection
+  // Structured Schema for E-E-A-T Compliance (Vancouver SEO Ranker)
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "PlumbingContractor",
@@ -159,7 +175,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A111C] text-white font-sans relative overflow-x-hidden selection:bg-red-600 selection:text-white">
+    <div className="min-h-screen bg-white text-slate-800 font-sans relative overflow-x-hidden selection:bg-red-600 selection:text-white antialiased">
       
       {/* Structural Schema Injection */}
       <script
@@ -167,269 +183,342 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Premium Ambient Radial Glow Layer */}
-      <div className="absolute top-0 left-1/4 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-red-900/10 rounded-full blur-[100px] md:blur-[150px] pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-blue-900/10 rounded-full blur-[90px] md:blur-[130px] pointer-events-none" />
+      {/* PREMIUM FLOATING PHONE BAR FOR MOBILE USERS (Drives conversions instantly) */}
+      <div className="md:hidden fixed bottom-4 right-4 left-4 z-50 animate-bounce">
+        <a 
+          href="tel:5648883159" 
+          className="flex items-center justify-center bg-red-600 hover:bg-red-700 text-white font-black text-lg md:text-xl uppercase px-6 py-5 rounded-2xl shadow-2xl border border-red-500/30 transition-all duration-300"
+        >
+          CALL NOW
+        </a>
+      </div>
 
-      {/* 1. TOP UTILITY HEADER */}
-      <header className="border-b border-white/[0.05] bg-[#0A111C]/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-6">
+      {/* 1. TOP PROFESSIONAL NAV HEADER - Fully Spaced & Cleaned */}
+      <header className="border-b border-slate-100 bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-sm transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 min-h-[6.5rem] sm:min-h-[7.5rem] flex items-center justify-between gap-6 flex-wrap md:flex-nowrap">
           
-          {/* Elite Modern Brand Name Lockup */}
-          <div className="flex flex-col group cursor-pointer select-none">
-            <div className="flex items-center gap-1.5 opacity-80 group-hover:opacity-100 transition-all duration-300">
-              <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse shadow-[0_0_8px_#ef4444]" />
-              <span className="text-[9px] sm:text-[10px] tracking-[0.25em] text-slate-400 font-bold uppercase leading-none">LICENSED · BONDED · INSURED</span>
+          {/* Elite Modern Brand Name & Logo Lockup with matching brand colors */}
+          <div 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center gap-5 group cursor-pointer select-none"
+          >
+            {/* Nav Mini Logo Badge (Larger and fully optimized) */}
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center transition-all duration-300 group-hover:scale-[1.03] shrink-0">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <img 
+                  src="/logo.jpg" 
+                  alt="Supreme Plumbing Service Logo" 
+                  className="absolute inset-0 w-full h-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    const parent = e.currentTarget.parentElement;
+                    if (parent) {
+                      const fallback = parent.querySelector('.nav-logo-fallback');
+                      if (fallback) fallback.classList.remove('hidden');
+                    }
+                  }}
+                  referrerPolicy="no-referrer"
+                />
+                <div className="nav-logo-fallback hidden flex flex-col items-center justify-center text-center">
+                  <span className="text-red-600 font-extrabold text-[13px] sm:text-lg tracking-tighter leading-none">SUPREME</span>
+                  <span className="text-[7px] sm:text-[9px] font-bold text-slate-800 tracking-[0.15em] mt-0.5">PLUMBING</span>
+                </div>
+              </div>
             </div>
-            <div className="text-base sm:text-lg font-black tracking-tight text-white mt-1 uppercase transition-all duration-300 group-hover:scale-[1.01]">
-              SUPREME <span className="text-red-500 group-hover:text-red-400 transition-colors duration-300">PLUMBING SERVICE</span>
+
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5 opacity-90 transition-all duration-300">
+                <span className="w-1.5 h-1.5 bg-red-600 rounded-full animate-pulse shadow-[0_0_8px_#dc2626]" />
+                <span className="text-[9px] sm:text-[10px] tracking-[0.25em] text-slate-500 font-black uppercase leading-none">LICENSED · BONDED · INSURED</span>
+              </div>
+              <div className="text-base sm:text-xl font-black tracking-tight text-slate-900 mt-1 uppercase group-hover:text-red-600 transition-colors duration-300">
+                SUPREME <span className="text-red-600 group-hover:text-blue-950 transition-colors duration-300">PLUMBING SERVICE</span>
+              </div>
+              <p className="text-[10.5px] text-slate-400 font-medium tracking-wide mt-0.5 hidden xs:block">
+                VANCOUVER, WA & CLARK COUNTY METRO
+              </p>
             </div>
           </div>
+
+          {/* Desktop Navigation Anchors - Enhances look & feel of a premier portal */}
+          <nav className="hidden lg:flex items-center gap-8 text-xs font-black tracking-wider uppercase text-slate-600">
+          </nav>
           
-          {/* CONTACT INFO */}
-          <div className="flex flex-col items-end justify-center text-right text-xs">
-            <a href="mailto:chris@supremeplumbingservice.net" className="hidden sm:flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors">
-              <svg className="w-3.5 h-3.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-              chris@supremeplumbingservice.net
-            </a>
-            <a href="tel:5648883159" className="flex items-center gap-1.5 bg-red-600/10 sm:bg-transparent border border-red-500/20 sm:border-transparent px-2.5 sm:px-0 py-1 sm:py-0 rounded-lg text-slate-200 hover:text-red-500 transition-colors sm:mt-1 font-mono font-bold text-sm sm:text-xs">
-              <svg className="w-3.5 h-3.5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-              </svg>
-              564-888-3159
-            </a>
+          {/* HEADER ACTION CONTACT SECTION */}
+          <div className="flex items-center gap-4">
+            <div className="flex flex-col items-end justify-center text-right text-xs">
+              <a href="mailto:chris@supremeplumbingservice.net" className="hidden sm:flex items-center gap-1.5 text-slate-600 hover:text-red-600 transition-colors font-semibold">
+                <Mail className="w-3.5 h-3.5 text-red-600" />
+                chris@supremeplumbingservice.net
+              </a>
+              <a href="tel:5648883159" className="flex items-center gap-1.5 bg-red-600/5 sm:bg-transparent border border-red-500/10 sm:border-transparent px-3 py-1.5 sm:py-0 rounded-xl text-slate-900 hover:text-red-600 transition-colors sm:mt-1 font-mono font-black text-sm">
+                <Phone className="w-3.5 h-3.5 text-red-600 animate-pulse shrink-0" />
+                564-888-3159
+              </a>
+            </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-12 relative z-10 space-y-20 sm:space-y-32">
+      {/* MAIN CONTAINER CONTENT */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-20 relative z-10 space-y-28 sm:space-y-40">
         
-        {/* 2. CINEMATIC HERO SECTION DESCRIPTION & BALANCED 3-COLUMN AXIS */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 items-center gap-8 pt-4 sm:pt-8">
+        {/* 2. CINEMATIC HERO SECTION - BALANCED 2-COLUMN LUXURY LAYOUT */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center pt-2 sm:pt-4">
           
-          {/* CENTER COLUMN: Central Lockup Copy */}
-          <div className="lg:col-span-2 text-center lg:text-left space-y-6 order-1">
-            <div className="space-y-4">
-              <span className="bg-white/[0.04] backdrop-blur-md border border-white/[0.08] px-4 py-1.5 rounded-full text-[11px] sm:text-xs font-semibold tracking-wider text-slate-300 uppercase inline-flex items-center gap-2 shadow-sm">
-                <span className="w-1.5 h-1.5 bg-red-500 rounded-full animate-pulse" />
-                SW Washington's Premier Plumber
-              </span>
-              <h1 className="text-4xl sm:text-6xl md:text-7xl font-black tracking-tighter text-white uppercase leading-none select-none flex flex-col gap-1 lg:items-start items-center">
-                <span className="text-white hover:text-red-500 transition-colors duration-300">SUPREME</span>
-                <span className="bg-gradient-to-r from-red-500 to-rose-500 bg-clip-text text-transparent filter hover:brightness-110 transition-all duration-300">
-                  PLUMBING
+          {/* COLUMN 1 (lg:col-span-7) - HERO LEFT BLOCK: TEXT, BADGES, AND HEADLINES WITH MASSIVE INTEGRATED CREST */}
+          <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
+            
+            {/* Visual Brand Crest Logo Row + Badges */}
+            <div className="flex flex-col items-center lg:items-start gap-6">
+              
+              {/* Dynamic Badges and Top Trust Indicators */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 max-w-2xl">
+                <span className="bg-slate-100 text-slate-800 border border-slate-200/90 px-4 py-2 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase inline-flex items-center gap-2 shadow-sm">
+                  <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                  SW Washington's Premier Plumber
                 </span>
-                <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-[0.45em] text-slate-400 mt-2 hover:text-white transition-colors duration-300">
-                  SERVICE
+                <span className="bg-red-50 border border-red-200/80 px-4 py-2 rounded-full text-[10px] sm:text-xs font-black tracking-wider text-red-600 uppercase inline-flex items-center gap-1.5 shadow-sm">
+                  <BadgePercent className="w-3.5 h-3.5 text-red-600 shrink-0" />
+                  WE WILL BEAT ANY REASONABLE ESTIMATE
                 </span>
-              </h1>
+              </div>
             </div>
 
-            <p className="text-sm sm:text-base md:text-lg text-slate-300 font-light leading-relaxed max-w-xl mx-auto lg:mx-0 px-2 lg:px-0">
-              Vancouver’s trusted home plumbing specialist. From expert tankless upgrades to luxury residential custom remodels and light commercial builds, we deliver clean, honest, premium plumbing backed by over a decade of real field experience.
-            </p>
+            {/* Side-by-Side Logo and Title Brand Panel */}
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-6 sm:gap-8 mt-2">
+              {/* Logo container placed to the left */}
+              <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 flex items-center justify-center transition-all duration-300 hover:scale-[1.03] select-none shrink-0">
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <img 
+                    src="/logo.jpg" 
+                    alt="Supreme Plumbing Service Logo Brand Crest" 
+                    className="absolute inset-0 w-full h-full object-contain"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                      const parent = e.currentTarget.parentElement;
+                      if (parent) {
+                        const fallback = parent.querySelector('.hero-logo-fallback');
+                        if (fallback) fallback.classList.remove('hidden');
+                      }
+                    }}
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="hero-logo-fallback hidden flex flex-col items-center justify-center text-center p-2">
+                    <span className="text-red-600 font-extrabold text-2xl sm:text-3xl tracking-tighter">SUPREME</span>
+                    <span className="text-[8px] sm:text-[10px] font-bold text-slate-800 tracking-[0.2em] mt-1">PLUMBING</span>
+                  </div>
+                </div>
+              </div>
 
-            {/* High Converting Action Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-3 sm:gap-4 pt-2 max-w-md mx-auto sm:max-w-none">
-              <a href="tel:5648883159" className="w-full sm:w-auto text-center bg-gradient-to-r from-red-600 to-rose-600 text-white text-xs font-black tracking-wider px-6 py-4 rounded-xl shadow-md hover:shadow-[0_0_25px_rgba(220,38,38,0.4)] transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] uppercase">
-                REQUEST FREE ESTIMATE
-              </a>
-              <a href="mailto:chris@supremeplumbingservice.net" className="w-full sm:w-auto text-center border border-white/20 text-white text-xs font-black tracking-wider px-6 py-4 rounded-xl hover:bg-white/[0.04] hover:border-white/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] uppercase">
-                CONNECT WITH CHRIS
-              </a>
+              {/* Cinematic Large Typography Segment */}
+              <div className="space-y-2 text-center sm:text-left">
+                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black tracking-tighter text-slate-900 uppercase leading-none select-none flex flex-col gap-1 sm:items-start items-center">
+                  <span className="text-blue-950 hover:text-red-600 transition-colors duration-300">SUPREME</span>
+                  <span className="bg-gradient-to-r from-red-600 to-rose-600 bg-clip-text text-transparent filter hover:brightness-110 transition-all duration-300">
+                    PLUMBING
+                  </span>
+                  <span className="text-lg sm:text-xl md:text-2xl font-bold tracking-[0.4em] text-slate-400 mt-2 hover:text-slate-600 transition-colors duration-300">
+                    SERVICE
+                  </span>
+                </h1>
+              </div>
+            </div>
+
+            {/* Descriptive Content and Dynamic CTA Buttons */}
+            <div className="space-y-6">
+              <p className="text-sm sm:text-base md:text-lg text-slate-600 font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0 px-2 lg:px-0">
+                Vancouver’s trusted home plumbing specialist. From expert high-efficiency tankless water heaters to complete repiping upgrades, custom kitchen fixtures, and responsive diagnostic leaks, we deliver supreme technical skill backed by over a decade of real-world experience. We are fully licensed, bonded, and insured.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row justify-center lg:justify-start items-center gap-4 max-w-lg mx-auto lg:mx-0 pt-2">
+                <a 
+                  href="tel:5648883159"
+                  className="w-full sm:w-auto text-center bg-gradient-to-r from-red-600 to-red-500 text-white text-xs font-black tracking-wider px-8 py-5 rounded-2xl shadow-md hover:shadow-[0_8px_25px_rgba(220,38,38,0.35)] hover:scale-[1.02] active:scale-[0.98] uppercase transition-all duration-300 cursor-pointer"
+                >
+                  CALL FOR FREE ESTIMATE
+                </a>
+                <button 
+                  onClick={() => handleScrollTo('experience')}
+                  className="w-full sm:w-auto text-center border-2 border-blue-950/20 text-blue-950 bg-white text-xs font-black tracking-wider px-8 py-5 rounded-2xl hover:bg-slate-50 hover:border-blue-950 hover:scale-[1.02] active:scale-[0.98] uppercase transition-all duration-300 cursor-pointer"
+                >
+                  WHY CHOOSE CHRIS
+                </button>
+              </div>
+
+              {/* Small inline bullet marks */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 gap-y-2 text-[11px] font-semibold text-slate-500 uppercase tracking-wider font-mono">
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  100% Satisfaction Guarantee
+                </span>
+              </div>
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Premium Responsive Interactive Image Carousel */}
-          <div className="lg:col-span-1 relative order-2 mt-4 lg:mt-0">
-            <div className="absolute inset-0 bg-red-600/5 rounded-2xl filter blur-xl pointer-events-none" />
-            <ImageCarousel images={CAROUSEL_IMAGES} initialSlide={0} />
+          {/* COLUMN 2 (lg:col-span-5) - HERO RIGHT COLUMN: HIGH RESOLUTION PICTURE SLIDER CAROUSEL */}
+          <div className="lg:col-span-5 relative order-2 mt-4 lg:mt-0">
+            <div className="p-1.5 border border-slate-200/70 rounded-3xl bg-slate-50 shadow-sm">
+              <ImageCarousel images={CAROUSEL_IMAGES} initialSlide={0} />
+            </div>
+            
+
           </div>
 
         </section>
 
-        {/* 3. TWO-COLUMN SERVICE GRID & EQUIPMENT SHOWCASE */}
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center py-6 sm:py-12">
+
+
+
+
+        {/* 5. TWO-COLUMN EXPERIENCE SHOWCASE & COMPREHENSIVE TEXT */}
+        <section id="experience" className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          <div className="space-y-6 sm:space-y-8 order-2 lg:order-1">
+          <div className="lg:col-span-7 space-y-6 sm:space-y-8">
             <div className="space-y-3">
-              <span className="text-red-500 text-xs font-mono font-bold tracking-widest uppercase block">Serving Vancouver & Surrounding Areas</span>
-              
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tighter leading-tight">
-                A DECADE OF <span className="text-red-500">TRUSTED</span> EXPERIENCE
+              <span className="text-red-600 text-xs font-mono font-black tracking-widest uppercase block">
+                Vancouver, WA Registered Contractor
+              </span>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-slate-900 leading-tight">
+                A DECADE OF DELIVERING SUPERIOR CRAFTSMANSHIP
               </h2>
-              <div className="h-1 w-20 bg-red-600 rounded-full" />
+              <div className="h-1.5 w-20 bg-red-600 rounded-full" />
             </div>
             
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-light">
-              We handle everything your home setup needs—specializing in high-efficiency tankless water heater builds, standard water heaters, full house repipes, and custom layout bathroom remodels. We also handle select light commercial plumbing repairs for local storefronts. No shortcuts, no hidden pricing—just top-tier work done right the first time.
+            <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
+              Supreme Plumbing Service is built on a foundation of uncompromising integrity, transparent communication, and master-level craftsmanship. Led by lead technician Chris, we specialize in everything from the integration of high-efficiency smart appliances to complex, master-layout bathroom remodels. We refuse to compromise on the fundamentals—ensuring every line is perfectly square, rigorously pressure-tested, and fully compliant with Washington regional codes. When you work with us, you are investing in lasting structural quality and absolute peace of mind.
             </p>
 
             <div className="grid grid-cols-2 gap-4">
-              {/* LED glow hover adjustments to red-500/40 and 0_0_25px */}
-              <div className="bg-white/[0.02] border border-white/[0.06] p-4 sm:p-6 rounded-2xl backdrop-blur-sm shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-                <div className="text-2xl sm:text-3xl font-black text-white">10+ Years</div>
-                <div className="text-[10px] font-mono tracking-wider text-slate-400 uppercase mt-1">Local Service</div>
+              <div className="bg-slate-50 border border-slate-200/80 p-4 sm:p-6 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.01]">
+                <div className="text-2xl sm:text-3xl font-black text-slate-900">10+ Years</div>
+                <div className="text-[10px] font-mono tracking-wider text-slate-500 uppercase mt-1">Clark County Field Experience</div>
               </div>
-              <div className="bg-white/[0.02] border border-white/[0.06] p-4 sm:p-6 rounded-2xl backdrop-blur-sm shadow-sm transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-                <div className="text-2xl sm:text-3xl font-black text-emerald-400">VERIFIED</div>
-                <div className="text-[10px] font-mono tracking-wider text-slate-400 uppercase mt-1">LICENSED PRO</div>
+              <div className="bg-slate-50 border border-slate-200/80 p-4 sm:p-6 rounded-2xl shadow-sm transition-all duration-300 hover:scale-[1.01] flex flex-col justify-center">
+                <div className="text-xl sm:text-2xl font-black text-slate-900 font-mono tracking-tight uppercase">
+                  SUPREPS747K2
+                </div>
+                <div className="text-[10px] font-mono tracking-wider text-slate-500 uppercase mt-1">WA State license ID</div>
               </div>
             </div>
 
-            {/* Catalog Container LED glow hover */}
-            <div className="bg-white/[0.03] backdrop-blur-md border border-white/[0.08] rounded-2xl p-5 sm:p-6 space-y-4 shadow-[0_8px_32px_0_rgba(0,0,0,0.2)] transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-              <h3 className="text-[10px] font-mono tracking-[0.25em] text-slate-400 font-bold uppercase">SERVICES CATALOG</h3>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
-                <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
-                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Tankless Water Heaters
+            {/* List block */}
+            <div className="bg-slate-50 border border-slate-200/70 rounded-2xl p-5 sm:p-6 space-y-4">
+              <h3 className="text-[10px] font-mono tracking-[0.2em] text-slate-500 font-bold uppercase">SERVICE GUARANTEE PROFILE</h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700">
+                <li className="flex items-center gap-2 font-medium">
+                  <span className="w-1.5 h-1.5 bg-red-600 rounded-full shrink-0" /> Fast Local Arrival
                 </li>
-                <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
-                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Water Heater Service
+                <li className="flex items-center gap-2 font-medium">
+                  <span className="w-1.5 h-1.5 bg-red-600 rounded-full shrink-0" /> Transparent Pricing Book
                 </li>
-                <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
-                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Full Residential Plumbing
+                <li className="flex items-center gap-2 font-medium">
+                  <span className="w-1.5 h-1.5 bg-red-600 rounded-full shrink-0" /> Trade-Grade Lead Fittings
                 </li>
-                <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
-                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Home Remodels & Repipes
-                </li>
-                <li className="flex items-center gap-3 text-slate-200 hover:text-white transition-colors">
-                  <span className="w-1.5 h-1.5 bg-red-500 rounded-full shrink-0" /> Light Commercial Repairs
+                <li className="flex items-center gap-2 font-medium">
+                  <span className="w-1.5 h-1.5 bg-red-600 rounded-full shrink-0" /> 100% Cleanup Certified
                 </li>
               </ul>
-              <div className="pt-3 border-t border-white/[0.05] text-[11px] text-slate-400 font-mono break-all">
-                Direct Dispatch: chris@supremeplumbingservice.net
-              </div>
             </div>
           </div>
 
-          {/* Right Side: Secondary Carousel (Starting with Slide 1, fully visible on mobile & desktop) */}
-          <div className="order-1 lg:order-2 relative w-full">
-            <div className="absolute inset-0 bg-red-600/5 rounded-2xl filter blur-xl pointer-events-none" />
-            <ImageCarousel images={CAROUSEL_IMAGES} initialSlide={1} />
+          {/* Right Side: Showcase Carousel (Fully functional starting on slide 1) */}
+          <div className="lg:col-span-5 relative w-full lg:mt-0">
+            <div className="p-1.5 border border-slate-200/70 rounded-3xl bg-slate-50 shadow-sm">
+              <ImageCarousel images={CAROUSEL_IMAGES} initialSlide={1} />
+            </div>
           </div>
 
-        </section>
-
-        {/* 4. GOOGLE TRUST & COMPLIANCE BLOCK / REVIEWS PANEL */}
-        <section className="flex justify-center pt-4">
-          <div className="w-full max-w-4xl bg-gradient-to-b from-white/[0.04] to-transparent border border-white/[0.06] rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center relative overflow-hidden backdrop-blur-md shadow-[0_8px_32px_0_rgba(0,0,0,0.3)] transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-px bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
-            <span className="bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-1 rounded-full text-[9px] sm:text-[10px] font-bold tracking-widest uppercase inline-block mb-4">
-              GOOGLE TRUST & COMPLIANCE
-            </span>
-            <h2 className="text-xl sm:text-2xl md:text-4xl font-black uppercase tracking-tight mb-4 text-white leading-tight">
-              VERIFY OUR REAL CUSTOMER RATING
-            </h2>
-            <p className="text-xs sm:text-sm md:text-base text-slate-300 max-w-xl mx-auto font-light mb-6 sm:mb-8 px-1">
-              Transparency matters. Click the button below to review our verified regional service records, checkout customer mapping, or write your review live on Google Maps.
-            </p>
-            <a 
-              href="https://maps.google.com" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="inline-flex items-center justify-center gap-3 bg-white text-black font-black px-6 sm:px-8 py-3.5 rounded-xl text-xs sm:text-sm tracking-wider uppercase hover:bg-slate-100 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-lg w-full sm:w-auto"
-            >
-              Open Live Google Profile
-              <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
-          </div>
-        </section>
+          </section>
 
       </main>
 
-      {/* 5. FOOTER ARCHITECTURE WITH INTEGRATED HIGH-FIDELITY DASHBOARD WIDGET */}
-      <footer className="border-t border-white/[0.05] bg-[#0A111C] mt-16 sm:mt-24 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 text-sm text-slate-400">
+      {/* 7. HIGH-FIDELITY FOOTER WITH ACTIVE STATE OPERATIONS WIDGET */}
+      <footer className="border-t border-slate-200 bg-slate-50 mt-16 sm:mt-24 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid grid-cols-1 md:grid-cols-3 gap-10 sm:gap-12 text-sm text-slate-600">
           
-          {/* Column 1: Brand & License */}
-          <div className="space-y-3">
-            <div className="text-white font-black tracking-tight text-lg uppercase">
-              SUPREME PLUMBING <span className="text-red-500 font-normal text-sm">SERVICE</span>
+          {/* Column 1: Institutional info */}
+          <div className="space-y-4">
+            <div className="text-slate-900 font-black tracking-tight text-lg uppercase flex items-center gap-2">
+              <span className="w-2 h-2 bg-red-600 rounded-full" />
+              SUPREME PLUMBING <span className="text-red-600 font-bold text-sm">SERVICE</span>
             </div>
-            <p className="font-light leading-relaxed text-xs">
-              Delivering specialized commercial-grade infrastructure execution for high-end residential clients throughout Southwest Washington.
+            <p className="font-medium leading-relaxed text-xs text-slate-500">
+              Delivering high-reliability commercial-grade mechanical infrastructure solutions for luxury residential builds and local commercial properties throughout SW Washington.
             </p>
-            <div className="inline-block bg-white/[0.04] border border-white/[0.08] px-3 py-1.5 rounded-lg text-[11px] font-mono tracking-wider text-slate-300">
-              WA LICENSE: SUPREPS747K2
+            <div className="inline-block bg-white border border-slate-200 px-3.5 py-2 rounded-xl text-[10px] sm:text-[11px] font-mono tracking-wider font-extrabold text-slate-700 shadow-sm">
+              WA REGISTRY LICENSE: SUPREPS747K2
             </div>
           </div>
 
-          {/* Unified High-Fidelity operations Dashboard Widget with updated LED hover effect */}
-          <div className="md:col-span-2 bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6 space-y-6 shadow-xl relative overflow-hidden backdrop-blur-md transition-all duration-300 hover:scale-[1.01] hover:border-red-500/40 hover:shadow-[0_0_25px_rgba(239,68,68,0.15)]">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+          {/* Columns 2-3: Operational Dashboard Area */}
+          <div className="md:col-span-2 bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/[0.03] rounded-full blur-3xl pointer-events-none" />
             
-            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-white/[0.05] pb-4 gap-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 gap-4">
               <div>
-                <span className="text-emerald-400 text-[10px] font-mono font-bold tracking-widest uppercase block mb-1">SYSTEM CONNECTIVITY</span>
-                <h3 className="text-white font-black tracking-tight text-sm uppercase">Active Operations & Verification Registry</h3>
+                <span className="text-emerald-700 text-[10px] font-mono font-bold tracking-widest uppercase block mb-1">
+                  SYSTEM CONNECTIVITY STATUS
+                </span>
+                <h3 className="text-slate-900 font-bold text-sm uppercase">Active Dispatch & Business Registry</h3>
               </div>
-              <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/25 rounded-full px-3 py-1">
-                <span className="w-2 h-2 bg-emerald-400 rounded-full animate-ping" />
-                <span className="w-2 h-2 bg-emerald-400 rounded-full absolute" />
-                <span className="text-emerald-400 font-mono text-[10px] font-bold uppercase tracking-wider">SYSTEMS LIVE</span>
+              <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1 shrink-0">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
+                <span className="w-2 h-2 bg-emerald-500 rounded-full absolute" />
+                <span className="text-emerald-700 font-mono text-[10px] font-black uppercase tracking-wider">SYSTEMS LIVE</span>
               </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               
-              {/* Sleek Operating Dispatch Rows */}
+              {/* Working Windows */}
               <div className="space-y-3">
-                <div className="text-slate-400 font-bold tracking-wider text-[11px] uppercase">OPERATING DISPATCH WINDOWS</div>
+                <div className="text-slate-500 font-bold tracking-wider text-[11px] uppercase">OPERATING DISPATCH WINDOWS</div>
                 <div className="space-y-2">
                   
-                  {/* Monday - Friday */}
-                  <div className="flex items-center justify-between bg-white/[0.02] border border-white/[0.04] rounded-xl px-3 py-2.5 transition-all hover:bg-white/[0.04]">
+                  {/* Mon - Fri */}
+                  <div className="flex items-center justify-between bg-slate-50 border border-slate-100 rounded-xl px-3.5 py-2.5 shadow-sm">
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-[0_0_8px_#34d399]" />
-                      <span className="text-slate-300 font-mono text-[11px]">Mon - Fri</span>
+                      <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+                      <span className="text-slate-700 font-mono text-[11px] font-bold">Mon - Fri</span>
                     </div>
-                    <span className="text-white font-bold font-mono text-[11px]">7:00 AM - 5:00 PM</span>
+                    <span className="text-slate-900 font-black font-mono text-[11px]">7:00 AM - 5:00 PM</span>
                   </div>
 
                   {/* Saturday */}
-                  <div className="flex items-center justify-between bg-white/[0.01] border border-white/[0.02] rounded-xl px-3 py-2.5 opacity-60">
+                  <div className="flex items-center justify-between bg-slate-50/50 border border-slate-100/50 rounded-xl px-3.5 py-2.5 opacity-60">
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-slate-600 rounded-full" />
-                      <span className="text-slate-400 font-mono text-[11px]">Saturday</span>
+                      <span className="w-1.5 h-1.5 bg-slate-400 rounded-full" />
+                      <span className="text-slate-500 font-mono text-[11px]">Saturday</span>
                     </div>
-                    <span className="text-slate-400 font-bold font-mono text-[11px]">CLOSED</span>
+                    <span className="text-slate-500 font-bold font-mono text-[11px]">CLOSED</span>
                   </div>
 
                   {/* Sunday */}
-                  <div className="flex items-center justify-between bg-white/[0.01] border border-white/[0.02] rounded-xl px-3 py-2.5 opacity-60">
+                  <div className="flex items-center justify-between bg-slate-50/50 border border-slate-100/50 rounded-xl px-3.5 py-2.5 opacity-60">
                     <div className="flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 bg-slate-600 rounded-full" />
-                      <span className="text-slate-400 font-mono text-[11px]">Sunday</span>
+                      <span className="w-1.5 h-1.5 bg-slate-400 rounded-full" />
+                      <span className="text-slate-500 font-mono text-[11px]">Sunday</span>
                     </div>
-                    <span className="text-slate-400 font-bold font-mono text-[11px]">CLOSED</span>
+                    <span className="text-slate-500 font-bold font-mono text-[11px]">CLOSED</span>
                   </div>
 
                 </div>
               </div>
 
-              {/* Security & Compliance Widget */}
+              {/* Compliance registry card */}
               <div className="space-y-3">
-                <div className="text-slate-400 font-bold tracking-wider text-[11px] uppercase">SECURITY & COMPLIANCE REGISTRY</div>
-                <div className="bg-white/[0.02] border border-white/[0.04] rounded-xl p-4 space-y-3 h-[calc(100%-24px)] flex flex-col justify-between">
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-slate-200 text-xs font-semibold">
-                      <svg className="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                      </svg>
-                      Licensed, Bonded, & Insured
+                <div className="text-slate-500 font-bold tracking-wider text-[11px] uppercase">SECURITY & REGULATORY STATUS</div>
+                <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 space-y-3.5">
+                  <div className="space-y-1">
+                    <div className="flex items-center gap-2 text-slate-900 text-xs font-black uppercase">
+                      <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                      Fully Bonded WA State
                     </div>
-                    <p className="text-slate-400 leading-normal font-sans text-xs">
-                      Active regional structural liability bonding and full commercial-grade indemnity verified under Washington State Board ID.
-                    </p>
                   </div>
-                  <div className="bg-white/[0.02] border border-white/[0.06] rounded px-2.5 py-1 text-[10px] font-mono tracking-wider text-slate-300 flex justify-between items-center">
-                    <span className="text-slate-500">BOARD ID:</span>
-                    <span className="text-white font-bold">SUPREPS747K2</span>
+                  <div className="bg-white border border-slate-200 rounded px-2.5 py-1 text-[10px] font-mono tracking-wider text-slate-600 flex justify-between items-center shadow-sm">
+                    <span className="text-slate-400 font-bold">STATE BOARD ID:</span>
+                    <span className="text-slate-900 font-black">SUPREPS747K2</span>
                   </div>
                 </div>
               </div>
@@ -439,14 +528,13 @@ export default function Home() {
 
         </div>
 
-        {/* Bottom Row Links & Credits */}
-        <div className="border-t border-white/[0.03] py-6 max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-[11px] sm:text-xs font-mono text-slate-500">
+        {/* Brand foot imprint links */}
+        <div className="border-t border-slate-200 py-6 max-w-7xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-[11px] sm:text-sm font-mono text-slate-500">
           <div>
-            © {new Date().getFullYear()} Supreme Plumbing Service. All Rights Reserved. UI Architecture by 360 AI Studios.
+            © {new Date().getFullYear()} Supreme Plumbing Service. SW Washington’s Premier Plumbing Resource. UI Architecture by 360 AI Studios.
           </div>
           <div className="flex gap-6">
-            <a href="tel:5648883159" className="hover:text-white transition-colors">Tel: 564-888-3159</a>
-            <a href="mailto:chris@supremeplumbingservice.net" className="hover:text-white transition-colors">Mail</a>
+            <a href="tel:5648883159" className="hover:text-red-600 transition-colors">Dispatch: 564-888-3159</a>
           </div>
         </div>
       </footer>
