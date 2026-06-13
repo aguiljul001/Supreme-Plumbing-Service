@@ -457,15 +457,7 @@ export default function Home() {
             
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-100 pb-4 gap-4">
               <div>
-                <span className="text-emerald-700 text-[10px] font-mono font-bold tracking-widest uppercase block mb-1">
-                  SYSTEM CONNECTIVITY STATUS
-                </span>
                 <h3 className="text-slate-900 font-bold text-sm uppercase">Active Dispatch & Business Registry</h3>
-              </div>
-              <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-3 py-1 shrink-0">
-                <span className="w-2 h-2 bg-emerald-500 rounded-full animate-ping" />
-                <span className="w-2 h-2 bg-emerald-500 rounded-full absolute" />
-                <span className="text-emerald-700 font-mono text-[10px] font-black uppercase tracking-wider">SYSTEMS LIVE</span>
               </div>
             </div>
 
